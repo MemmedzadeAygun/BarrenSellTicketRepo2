@@ -1,0 +1,6 @@
+@BarrenSellTicket.WebApi_HostAddress = http://localhost:5011
+
+GET {{BarrenSellTicket.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
