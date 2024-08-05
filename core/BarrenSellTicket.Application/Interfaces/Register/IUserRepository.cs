@@ -11,6 +11,7 @@ namespace BarrenSellTicket.Application.Interfaces.Register
     {
         Task AddUser(Users user);
         void UpdateUser(Users user);
-        Task<Users?> GetUsers(string email, string password);
+        Task<Users> GetUserById(int id);
+        Task<Users?> GetUsers(string email);
     }
 }

@@ -20,8 +20,7 @@ namespace BarrenSellTicket.Domain.Entities.Events
         public int? ImageId { get; set; }
         public Image ProfileImage { get; set; }
         public ICollection<Event> Events { get; set; }
-        public int UserId { get; set; }
-        public Users User { get; set; }
+     
         public int? AddressId { get; set; }
         public Address Address { get; set; }
     }

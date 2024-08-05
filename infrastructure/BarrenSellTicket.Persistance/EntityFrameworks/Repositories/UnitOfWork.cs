@@ -1,10 +1,14 @@
 ﻿using BarrenSellTicket.Application.Interfaces;
 using BarrenSellTicket.Application.Interfaces.Register;
+using BarrenSellTicket.Domain.Entities.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,11 +18,13 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories
     {
         private readonly BarrenSellTicketContext _context;
         private readonly Dictionary<Type, Object> _repositories;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UnitOfWork(BarrenSellTicketContext context)
+        public UnitOfWork(BarrenSellTicketContext context, IHttpContextAccessor httpContextAccessor)
         {
             _repositories = new Dictionary<Type, Object>();
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IAddressRepository AddressRepository => SetReppository<IAddressRepository>();
@@ -36,16 +42,40 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories
         public IRoleRepository RoleRepository => SetReppository<IRoleRepository>();
         public ICustomerRepository CustomerRepository => SetReppository<ICustomerRepository>();
         public IContactListRepository ContactListRepository => SetReppository<IContactListRepository>();
+        public IUserRoleRepository UserRoleRepository => SetReppository<IUserRoleRepository>();
 
         public async Task Commit()
         {
-           await _context.SaveChangesAsync();
+
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            IEnumerable<EntityEntry<BaseEntity>> entities = _context
+              .ChangeTracker
+              .Entries<BaseEntity>()
+              .ToList();
+
+            foreach (var entry in entities)
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.CreatedId = Convert.ToInt32(userId);
+
+                }
+
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Entity.UpdatedId = Convert.ToInt32(userId);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            //await _context.Database.CommitTransactionAsync();
         }
 
 
         public TRepository GetRepository<TRepository>() where TRepository : class
         {
-            return SetReppository<TRepository>();
+            throw new NotImplementedException();
         }
 
         public void Rollback()

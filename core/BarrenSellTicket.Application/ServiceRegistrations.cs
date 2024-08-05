@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using BarrenSellTicket.Application.Features.Command.Others;
+using BarrenSellTicket.Application.Validators.FluentValidations;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -16,6 +20,10 @@ namespace BarrenSellTicket.Application
         {
             services.AddMediatR(x=>x.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddFluentValidationAutoValidation();
+            services.AddFluentValidationClientsideAdapters();
+
+            services.AddScoped(typeof(AbstractValidator<AddBankAccountCommand>),typeof(AddBankAccountCommandValidator));
         }
     }
 }

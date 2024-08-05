@@ -1,4 +1,6 @@
-﻿using BarrenSellTicket.Persistance.EntityFrameworks;
+﻿using BarrenSellTicket.Application.Interfaces;
+using BarrenSellTicket.Persistance.EntityFrameworks;
+using BarrenSellTicket.Persistance.EntityFrameworks.Repositories;
 using BarrenSellTicket.Persistance.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,5 +24,8 @@ public static class ServiceRegistration
             .AddDbContext<BarrenSellTicketContext>(options=>options
             .UseSqlServer(connectionString)
             .AddInterceptors(new UpdateBaseEntityInterceptors()));
+
+        services.AddHttpContextAccessor();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

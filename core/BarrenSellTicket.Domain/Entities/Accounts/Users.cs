@@ -13,10 +13,11 @@ namespace BarrenSellTicket.Domain.Entities.Accounts
         public string Email { get; set; }
         public string PasswordSalt { get; set; }
         public string PasswordHash { get; set; }
-        public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<UserRole?> UserRoles { get; set; }=new HashSet<UserRole?>();
         public ICollection<ContactList> ContactLists { get; set; }
         public OrganizerDetail OrganizerDetail { get; set; }
         public Customer Customer { get; set; }
         public ICollection<Ticket> Tickets { get; set; }
     }
+
 }

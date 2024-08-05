@@ -12,10 +12,7 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks
 {
     public class BarrenSellTicketContext:DbContext
     {
-        public BarrenSellTicketContext()
-        {
 
-        }
         public BarrenSellTicketContext(DbContextOptions<BarrenSellTicketContext> optionsBuilder)
             :base(optionsBuilder)
         {
@@ -35,7 +32,7 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks
         public DbSet<Payouts> Payouts=>this.Set<Payouts>();
         public DbSet<Ticket> Tickets=>this.Set<Ticket>();
         public DbSet<Users> Users => this.Set<Users>();
-        public DbSet<Role> Roles => this.Set<Role>();
+        public DbSet<Role> Role => this.Set<Role>();
         public DbSet<UserRole> UserRole => this.Set<UserRole>();
 
 

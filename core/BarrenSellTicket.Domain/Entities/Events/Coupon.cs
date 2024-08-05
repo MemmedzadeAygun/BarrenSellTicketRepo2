@@ -13,14 +13,14 @@ namespace BarrenSellTicket.Domain.Entities.Events
         public string Code  { get; set; }
         public decimal Discount { get; set; }
         public DiscountType DiscountType { get; set; }
-        public DateOnly DiscountEnd { get; set; }
-        public TimeOnly Time { get; set; }
+        public DateTime DiscountEnd { get; set; }
+        public DateTime Time { get; set; }
         public ICollection<OrderCoupon> OrderCoupons { get; set; }
     }
 
-    public enum DiscountType
+    public enum DiscountType:int
     {
-        Percent,
-        FixedPrice
+        Percent = 1  ,
+        FixedPrice=2
     }
 }

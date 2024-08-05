@@ -26,10 +26,7 @@ namespace BarrenSellTicket.Persistance.DbConfigurations.Accounts
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId);
 
-            builder
-                .HasOne(x => x.OrganizerDetail)
-                .WithOne(x => x.User)
-                .HasForeignKey<OrganizerDetail>(x => x.UserId);
+         
         }
     }
 }

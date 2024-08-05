@@ -1,4 +1,5 @@
 ﻿using BarrenSellTicket.Domain.Entities.Events;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,4 +10,5 @@ namespace BarrenSellTicket.Application.Interfaces;
 
 public interface IImageRepository:IRepository<Image>
 {
+    //Task<string> SaveImageAsync(IFormFile imageFile);
 }

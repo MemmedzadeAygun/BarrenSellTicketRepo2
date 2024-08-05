@@ -28,5 +28,6 @@ namespace BarrenSellTicket.Application.Interfaces
         IRoleRepository RoleRepository { get; }
         ICustomerRepository CustomerRepository { get; }
         IContactListRepository ContactListRepository { get; }
+        IUserRoleRepository UserRoleRepository { get; }
     }
 }

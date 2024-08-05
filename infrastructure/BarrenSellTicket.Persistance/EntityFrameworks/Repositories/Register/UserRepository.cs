@@ -23,12 +23,18 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories.Register
             await _dbcontext.Set<Users>().AddAsync(user);
         }
 
-        public async Task<Users?> GetUsers(string email, string password)
+        public async Task<Users> GetUserById(int id)
+        {
+           return await _dbcontext.Set<Users>().FindAsync(id);
+        }
+
+        public async Task<Users?> GetUsers(string email)
         {
             return await _dbcontext.Set<Users>()
                 .Include(x=>x.Customer)
-                .FirstOrDefaultAsync(x => x.Email == email && x.PasswordHash == password);
+                .FirstOrDefaultAsync(x => x.Email == email);
         }
+
 
         public void UpdateUser(Users user)
         {
