@@ -5,6 +5,7 @@ using BarrenSellTicket.Domain.Entities.Events;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace BarrenSellTicket.Application.Features.Command.Others
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
+
         public AddOrganizerDetailCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment environment)
         {
             _unitOfWork = unitOfWork;
@@ -31,10 +33,10 @@ namespace BarrenSellTicket.Application.Features.Command.Others
             var organizerDetail = _mapper.Map<OrganizerDetail>(request);
             if (request.ImageFile!=null)
             {    
-               var imageUrl = await SaveImageAsync(request.ImageFile);
+               var fullPath = await SaveImageAsync(request.ImageFile);
 
                 //var image = new Image { ImageUrl = imageUrl };
-                var image = _mapper.Map<Image>(new Image { ImageUrl = imageUrl });
+                var image = _mapper.Map<Image>(new Image { ImageUrl = fullPath,Description=request.Description });
                 organizerDetail.ProfileImage = image;
                //await _unitOfWork.ImageRepository.AddAsync(image);
 
@@ -67,6 +69,7 @@ namespace BarrenSellTicket.Application.Features.Command.Others
             }
 
             var contentPath = _environment.ContentRootPath;
+
             var path = Path.Combine(contentPath, "Uploads");
             if (!Directory.Exists(path))
             {
@@ -83,12 +86,14 @@ namespace BarrenSellTicket.Application.Features.Command.Others
             string uniqueString = Guid.NewGuid().ToString();
             var newFileName = uniqueString + ext;
             var fileWithPath = Path.Combine(path, newFileName);
+
             var stream = new FileStream(fileWithPath, FileMode.Create);
             await imageFile.CopyToAsync(stream);
             stream.Close();
 
-            return newFileName;
+            return fileWithPath;
 
         }
+
     }
 }

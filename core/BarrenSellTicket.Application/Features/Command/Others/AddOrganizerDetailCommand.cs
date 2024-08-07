@@ -19,6 +19,6 @@ namespace BarrenSellTicket.Application.Features.Command.Others
         public string Country { get; set; }
         public string City { get; set; }
         public string Addres { get; set; }
-        public int UserId { get; set; }
+        public string Description { get; set; }
     }
 }

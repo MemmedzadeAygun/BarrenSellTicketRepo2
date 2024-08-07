@@ -13,11 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarrenSellTicket.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarrenSellTicket.Application", "core\BarrenSellTicket.Application\BarrenSellTicket.Application.csproj", "{D423AC24-E822-48B6-8DC5-B7A578F5B21A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarrenSellTicket.Infrastructure", "infrastructure\BarrenSellTicket.Infrastructure\BarrenSellTicket.Infrastructure.csproj", "{0E43C386-B8CC-4400-8966-A9E730B87A89}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarrenSellTicket.Persistance", "infrastructure\BarrenSellTicket.Persistance\BarrenSellTicket.Persistance.csproj", "{6E5787A5-CD1F-400A-A765-248D3467E710}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarrenSellTicket.WebApi", "BarrenSellTicket.WebApi\BarrenSellTicket.WebApi.csproj", "{45AFB688-79E9-4092-B634-91F04524F6DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarrenSellTicket.Infrastructure", "infrastructure\BarrenSellTicket.Infrastructure\BarrenSellTicket.Infrastructure.csproj", "{6DB295A5-461D-4B5C-917F-457FC36113F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,6 @@ Global
 		{D423AC24-E822-48B6-8DC5-B7A578F5B21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D423AC24-E822-48B6-8DC5-B7A578F5B21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D423AC24-E822-48B6-8DC5-B7A578F5B21A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E43C386-B8CC-4400-8966-A9E730B87A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E43C386-B8CC-4400-8966-A9E730B87A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E43C386-B8CC-4400-8966-A9E730B87A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E43C386-B8CC-4400-8966-A9E730B87A89}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E5787A5-CD1F-400A-A765-248D3467E710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E5787A5-CD1F-400A-A765-248D3467E710}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E5787A5-CD1F-400A-A765-248D3467E710}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{45AFB688-79E9-4092-B634-91F04524F6DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45AFB688-79E9-4092-B634-91F04524F6DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45AFB688-79E9-4092-B634-91F04524F6DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DB295A5-461D-4B5C-917F-457FC36113F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DB295A5-461D-4B5C-917F-457FC36113F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DB295A5-461D-4B5C-917F-457FC36113F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DB295A5-461D-4B5C-917F-457FC36113F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,9 +52,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7774312B-0C6A-451B-9A45-CF85D200D78D} = {7CC7DEBE-C7E2-47E4-9BA0-A7A14F460070}
 		{D423AC24-E822-48B6-8DC5-B7A578F5B21A} = {7CC7DEBE-C7E2-47E4-9BA0-A7A14F460070}
-		{0E43C386-B8CC-4400-8966-A9E730B87A89} = {4A8ADED0-1515-4675-8D1C-2A116FB2B850}
 		{6E5787A5-CD1F-400A-A765-248D3467E710} = {4A8ADED0-1515-4675-8D1C-2A116FB2B850}
 		{45AFB688-79E9-4092-B634-91F04524F6DA} = {99CEAFD8-9155-4C06-94D4-2164411CFB36}
+		{6DB295A5-461D-4B5C-917F-457FC36113F8} = {4A8ADED0-1515-4675-8D1C-2A116FB2B850}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56280A33-B530-47C6-BF1E-17FF69B8CCFA}

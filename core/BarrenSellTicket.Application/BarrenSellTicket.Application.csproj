@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\infrastructure\BarrenSellTicket.Infrastructure\BarrenSellTicket.Infrastructure.csproj" />
     <ProjectReference Include="..\BarrenSellTicket.Domain\BarrenSellTicket.Domain.csproj" />
   </ItemGroup>
 

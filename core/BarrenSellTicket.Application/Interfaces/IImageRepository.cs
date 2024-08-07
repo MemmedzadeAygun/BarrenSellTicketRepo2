@@ -10,5 +10,4 @@ namespace BarrenSellTicket.Application.Interfaces;
 
 public interface IImageRepository:IRepository<Image>
 {
-    //Task<string> SaveImageAsync(IFormFile imageFile);
 }

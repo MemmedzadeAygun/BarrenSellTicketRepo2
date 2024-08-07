@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BarrenSellTicket.Application.Features.Queries
 {
-    public class GetOrganizerDetailQuery:IRequest<IEnumerable<OrganizerDetailViewDto>>
+    public class GetOrganizerDetailQuery:IRequest<OrganizerDetailViewDto>
     {
         public int organizerDetailId { get; set; }
     }

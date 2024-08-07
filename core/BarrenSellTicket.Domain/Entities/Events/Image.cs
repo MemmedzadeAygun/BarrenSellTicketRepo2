@@ -10,7 +10,7 @@ namespace BarrenSellTicket.Domain.Entities.Events
     public class Image:BaseEntity
     {
         public string ImageUrl { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; } = string.Empty;
         public Event Event { get; set; }
         public OrganizerDetail OrganizerDetail { get; set; }
     }

@@ -1,5 +1,7 @@
 ﻿using BarrenSellTicket.Application.Extensions;
 using BarrenSellTicket.Application.Features.Command.Others;
+using BarrenSellTicket.Application.Features.Command.Others.UpdateCommand;
+using BarrenSellTicket.Application.Features.Queries;
 using BarrenSellTicket.Application.Interfaces;
 using BarrenSellTicket.Domain.Entities.Events;
 using MediatR;
@@ -12,11 +14,9 @@ namespace BarrenSellTicket.WebApi.Controllers
     [ApiController]
     public class OrganizerDetailController : ApiControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
 
-        public OrganizerDetailController(IMediator mediator, IUnitOfWork unitOfWork) : base(mediator)
+        public OrganizerDetailController(IMediator mediator) : base(mediator)
         {
-            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
@@ -35,13 +35,50 @@ namespace BarrenSellTicket.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<OrganizerDetail>> GetByIdOrganizerDetail(int id)
         {
-            var organizerDetail = await _unitOfWork.OrganizerDetailRepository.GetByIdAsync(id);
-            if (organizerDetail is null)
+            var query = new GetOrganizerDetailQuery { organizerDetailId = id };
+            var result = await _mediator.Send(query);
+
+            if (result == null)
             {
                 return NotFound();
             }
 
-            return Ok(organizerDetail);
+            return Ok(result);
+        }
+
+
+
+        [HttpPut("{id}/image")]
+        public async Task<ActionResult<ApiResponseModel<string>>> UpdateOrganizerImage(int id, /*[FromForm]*/ IFormFile imageFile)
+        {
+            if (imageFile == null)
+            {
+                return BadRequest("Image file is not provided");
+            }
+
+            var command = new UpdateOrganizerİmageCommand
+            {
+                Id = id,
+                ImageFile=imageFile
+            };
+
+            await _mediator.Send(command);
+
+            return await SuccessResult<string>("Image update successfully");
+        }
+
+
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ApiResponseModel<string>>> UpdateOrganizerDetail(int id,UpdateOrganizerDetailCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest("Id mismatch");
+            }
+
+            await _mediator.Send(command);
+            return await SuccessResult<string>("OrganizerDetail update successfully");
         }
     }
 }
