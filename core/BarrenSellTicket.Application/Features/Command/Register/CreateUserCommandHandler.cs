@@ -43,16 +43,38 @@ namespace BarrenSellTicket.Application.Features.Command.Register
             var user = _mapper.Map<Users>(request);
             user.Customer = customer;
 
+
+
             byte[] passwordHash, passwordSalt;
 
             HasHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
             user.PasswordHash = Convert.ToBase64String(passwordHash);
             user.PasswordSalt = Convert.ToBase64String(passwordSalt);
 
-            //user.UserRoles = new List<UserRole>()
-            //{
-            //    new UserRole{RoleId  = 3}
-            //};
+
+            if (request.UserType == UserType.User)
+            {
+                user.UserRoles = new List<UserRole>()
+                {
+                    new UserRole{RoleId  = 2}
+                };
+
+            }
+            else if(request.UserType==UserType.Admin)
+            {
+                user.UserRoles = new List<UserRole>()
+                {
+                    new UserRole{RoleId  = 3}
+                };
+            }
+            else if (request.UserType==UserType.Organizer)
+            {
+                user.UserRoles = new List<UserRole>()
+                {
+                    new UserRole{RoleId= 4 }
+                };
+            }
+
 
             await _unitOfWork.UserRepository.AddUser(user);
             await _unitOfWork.Commit();

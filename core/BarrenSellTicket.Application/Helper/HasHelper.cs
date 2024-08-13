@@ -20,12 +20,13 @@ namespace BarrenSellTicket.Application.Helper
 
         public static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using (var hmac=new HMACSHA256()) 
+            using (var hmac=new HMACSHA256(passwordSalt)) 
             {
                 byte[] computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
                 
                 return computeHash.SequenceEqual(passwordHash);
             }
         }
+
     }
 }

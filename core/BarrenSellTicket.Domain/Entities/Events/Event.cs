@@ -10,9 +10,9 @@ namespace BarrenSellTicket.Domain.Entities.Events
     public class Event:BaseEntity
     {
         public string Name { get; set; }
-        public DateOnly EventDate { get; set; }
-        public TimeOnly BeginTime { get; set; }
-        public TimeOnly EndTime { get; set; }
+        public DateTime EventDate { get; set; }
+        public DateTime BeginTime { get; set; }
+        public DateTime EndTime { get; set; }
         public decimal Duration { get; set; }
         public string Description { get; set; }
         public int AddressId { get; set; }
@@ -22,7 +22,7 @@ namespace BarrenSellTicket.Domain.Entities.Events
         public int EventCategoryId { get; set; }
         public EventCategory EventCategory { get; set; }
         public int OrganizerDetailId { get; set; }
-        public int ImageId { get; set; }
+        public int? ImageId { get; set; }
         public Image Image { get; set; }
         public OrganizerDetail OrganizerDetail { get; set; }
         public ICollection<Ticket> Tickets { get; set; }

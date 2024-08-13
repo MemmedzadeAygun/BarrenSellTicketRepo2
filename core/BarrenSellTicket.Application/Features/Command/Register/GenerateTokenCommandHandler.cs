@@ -28,9 +28,16 @@ namespace BarrenSellTicket.Application.Features.Command.Register
 
             var user = await _uow.UserRepository.GetUsers(request.Email);
 
-            if (user is null && HasHelper.VerifyPasswordHash(request.Password,Convert.FromBase64String(user.PasswordHash),Convert.FromBase64String(user.PasswordSalt)))
+            if (user is null)
             {
-                throw new SellTicketException("Email or password is incorrect");  //FluentValidation'la tamamla
+                throw new SellTicketException("Email not found");
+            }
+          
+            if (!HasHelper.VerifyPasswordHash(request.Password,
+                Convert.FromBase64String(user.PasswordHash),
+                Convert.FromBase64String(user.PasswordSalt)))
+            {
+                throw new SellTicketException("password is incorrect");  //FluentValidation'la tamamla
             }
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"));
@@ -42,6 +49,7 @@ namespace BarrenSellTicket.Application.Features.Command.Register
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
                 new Claim(ClaimTypes.Name,user.Customer.FirstName),
                 new Claim(ClaimTypes.Surname,user.Customer.LastName),
+                
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor

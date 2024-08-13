@@ -1,6 +1,7 @@
 ﻿using BarrenSellTicket.Application.Dtos;
 using BarrenSellTicket.Application.Features.Command.Register;
 using BarrenSellTicket.Application.Features.Queries;
+using BarrenSellTicket.Domain.Entities.Accounts;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -73,6 +74,20 @@ namespace BarrenSellTicket.WebApi.Controllers
         {
             await _mediator.Send(command);
             return await SuccessResult<string>("The user has been assigned a role");
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Role>> GetByIdRole(int id)
+        {
+            var query = new GetRoleByIdQuery { roleId = id };
+            var result = await _mediator.Send(query);
+
+            if (result is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
     }
 }

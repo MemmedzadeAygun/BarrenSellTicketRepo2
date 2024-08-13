@@ -15,9 +15,16 @@ namespace BarrenSellTicket.Domain.Entities.Accounts
         public string PasswordHash { get; set; }
         public ICollection<UserRole?> UserRoles { get; set; }=new HashSet<UserRole?>();
         public ICollection<ContactList> ContactLists { get; set; }
-        public OrganizerDetail OrganizerDetail { get; set; }
         public Customer Customer { get; set; }
         public ICollection<Ticket> Tickets { get; set; }
+
+    }
+
+    public enum UserType
+    {
+        User=1,
+        Organizer=2,
+        Admin=3
     }
 
 }

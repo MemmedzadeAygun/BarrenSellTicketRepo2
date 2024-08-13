@@ -3,6 +3,7 @@ using BarrenSellTicket.Application.Features.Command.Others;
 using BarrenSellTicket.Application.Features.Command.Others.DeleteCommand;
 using BarrenSellTicket.Application.Features.Command.Others.UpdateCommand;
 using BarrenSellTicket.Application.Features.Queries;
+using BarrenSellTicket.Domain.Entities.Events;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -69,6 +70,19 @@ namespace BarrenSellTicket.WebApi.Controllers
             {
                 return await InternalServerErrorResult<string>(ex.Message);
             }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ContactList>> getContactListById(int id)
+        {
+            var query = new GetContactListByIdQuery { contactListId = id };
+            var result = await _mediator.Send(query);
+            if (result is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
 
     }

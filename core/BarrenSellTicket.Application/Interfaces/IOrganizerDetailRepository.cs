@@ -11,6 +11,5 @@ namespace BarrenSellTicket.Application.Interfaces;
 public interface IOrganizerDetailRepository:IRepository<OrganizerDetail>
 {
     Task<OrganizerDetail> GetById(int id);
-
-    Task<OrganizerDetail> GetByIdWithManualLoading(int id);
+    Task<List<OrganizerDetail>> GetAll();
 }

@@ -1,10 +1,12 @@
-﻿using BarrenSellTicket.Application.Extensions;
+﻿using BarrenSellTicket.Application.Dtos;
+using BarrenSellTicket.Application.Extensions;
 using BarrenSellTicket.Application.Features.Command.Others;
 using BarrenSellTicket.Application.Features.Command.Others.UpdateCommand;
 using BarrenSellTicket.Application.Features.Queries;
 using BarrenSellTicket.Application.Interfaces;
 using BarrenSellTicket.Domain.Entities.Events;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +14,7 @@ namespace BarrenSellTicket.WebApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class OrganizerDetailController : ApiControllerBase
     {
 
@@ -49,7 +52,7 @@ namespace BarrenSellTicket.WebApi.Controllers
 
 
         [HttpPut("{id}/image")]
-        public async Task<ActionResult<ApiResponseModel<string>>> UpdateOrganizerImage(int id, /*[FromForm]*/ IFormFile imageFile)
+        public async Task<ActionResult<ApiResponseModel<string>>> UpdateOrganizerImage(int id, IFormFile imageFile)
         {
             if (imageFile == null)
             {
@@ -79,6 +82,16 @@ namespace BarrenSellTicket.WebApi.Controllers
 
             await _mediator.Send(command);
             return await SuccessResult<string>("OrganizerDetail update successfully");
+        }
+
+
+        [HttpGet]
+        [ActionName("organizerDetail")]
+        public async Task<ActionResult<ApiResponseModel<List<OrganizerDetailViewDto>>>> GetOrganizerDetails()
+        {
+            var organizerdetail = await _mediator.Send(new GetAllOrganizerDetailQuery());
+
+            return await SuccessResult("OrganizerDetail data is selected", organizerdetail);
         }
     }
 }

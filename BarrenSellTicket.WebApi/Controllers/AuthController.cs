@@ -1,5 +1,6 @@
 ﻿using BarrenSellTicket.Application.Dtos;
 using BarrenSellTicket.Application.Features.Command.Register;
+using BarrenSellTicket.Domain.Entities.Accounts;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,8 +31,22 @@ namespace BarrenSellTicket.WebApi.Controllers
         {
             var result = await _mediator.Send(command);
 
+            //if (result.Type == UserType.Admin)
+            //{
+            //    return await SuccessResult("Admin olaraq daxil oldunuz", result);
+            //}
+            //else if (result.Type==UserType.Organizer)
+            //{
+            //    return await SuccessResult("Teskilatci olaraq daxil oldunuz", result);
+            //}
+            //else if (result.Type==UserType.User)
+            //{
+            //    return await SuccessResult("Istifadeci olaraq daxil oldunuz", result);
+            //}
+
             return await SuccessResult("Token generated successfully", result);
 
+            //return Unauthorized("Selahiyyetiniz yoxdur");
         }
     }
 }

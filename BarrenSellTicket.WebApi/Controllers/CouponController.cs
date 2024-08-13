@@ -3,6 +3,7 @@ using BarrenSellTicket.Application.Features.Command.Others;
 using BarrenSellTicket.Application.Features.Command.Others.DeleteCommand;
 using BarrenSellTicket.Application.Features.Command.Others.UpdateCommand;
 using BarrenSellTicket.Application.Features.Queries;
+using BarrenSellTicket.Domain.Entities.Events;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -68,6 +69,19 @@ namespace BarrenSellTicket.WebApi.Controllers
             {
                 return await InternalServerErrorResult<string>(ex.Message);
             }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Coupon>> getCouponById(int id)
+        {
+            var coupon = new GetCouponByIdQuery { couponId = id };
+            var result = await _mediator.Send(coupon);
+            if (result is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
     }
 }

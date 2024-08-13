@@ -12,8 +12,18 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories
 {
     public class OrganizerDetailRepository : EfGenericRepository<OrganizerDetail>, IOrganizerDetailRepository
     {
+        private readonly BarrenSellTicketContext _context;
         public OrganizerDetailRepository(BarrenSellTicketContext dbcontext) : base(dbcontext)
         {
+            _context = dbcontext;
+        }
+
+        public async Task<List<OrganizerDetail>> GetAll()
+        {
+            return await _context.OrganizerDetails
+                .Include(z => z.Address)
+                .Include(z => z.ProfileImage)
+                .ToListAsync();
         }
 
         public async Task<OrganizerDetail> GetById(int id)
@@ -24,30 +34,6 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<OrganizerDetail> GetByIdWithManualLoading(int id)
-        {
-            return await Table
-                .Where(x => x.Id == id)
-                .Select(x => new OrganizerDetail
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    About = x.About,
-                    Phone = x.Phone,
-                    Address = x.Address!=null? new Address
-                    {
-                        Id=x.Address.Id,
-                        Country=x.Address.Country,
-                        City=x.Address.City,
-                        Addres=x.Address.Addres
-                    }:null,
-                    ProfileImage = x.ProfileImage!=null? new Image 
-                    {
-                        Id=x.ProfileImage.Id,
-                        ImageUrl=x.ProfileImage.ImageUrl
-                    }:null
-                })
-                .FirstOrDefaultAsync();
-        }
+       
     }
 }
