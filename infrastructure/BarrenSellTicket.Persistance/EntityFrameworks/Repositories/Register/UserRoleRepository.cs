@@ -25,6 +25,27 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories.Register
             await _dbContext.UserRole.AddAsync(userRoles);
         }
 
+        public async Task<List<string>> GetRoleNameByUserId(int id)
+        {
+             var roles = await _dbContext.Set<UserRole>()
+                .Include(x=>x.Role)
+                .Where(x=>x.UserId== id)
+                .Select(x=>x.Role.RoleName)
+                .ToListAsync();
+
+            return roles;
+        }
+
+        //public async Task<List<UserRole>> GetRoleNameByUserId(int id)
+        //{
+        //    var roles=await _dbContext.Set<UserRole>()
+        //        .Include(x=>x.Role)
+        //        .Where(x=>x.RoleId== id)
+        //        .ToListAsync();
+
+        //    roles.Select(x => x.Role.RoleName);
+        //}
+
         public async Task<UserRole> GetUserById(int id)
         {
             return await _dbContext.Set<UserRole>().FindAsync(id);
@@ -40,21 +61,22 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories.Register
             return await _dbContext.Set<UserRole>().Where(expression).ToListAsync();
         }
 
-        public async void GetRoleByUserId(int roleId)
-        {
-            var roles = await _dbContext.Set<UserRole>()
-                  .Include(x => x.Role)
-                  .Where(x => x.RoleId == roleId)
-                  .ToListAsync();
+        //public async void GetRoleByUserId(int roleId)
+        //{
+        //    var roles = await _dbContext.Set<UserRole>()
+        //          .Include(x => x.Role)
+        //          .Where(x => x.RoleId == roleId)
+        //          .ToListAsync();
 
-            roles.Select(x => x.Role.RoleName);
+        //    roles.Select(x => x.Role.RoleName);
 
-        }
+        //}
 
         public bool Remove(UserRole userRole)
         {
             var removed=_dbContext.Set<UserRole>().Remove(userRole);
             return removed.State == EntityState.Deleted;
         }
+
     }
 }

@@ -58,6 +58,8 @@ namespace BarrenSellTicket.Application.Features.Command.Register
 
             //var roleNames = userRoles.Select(ur => ur.role).ToList();
 
+            var roleNames = await _uow.UserRoleRepository.GetRoleNameByUserId(user.Id);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject=new ClaimsIdentity(claims),
@@ -72,7 +74,7 @@ namespace BarrenSellTicket.Application.Features.Command.Register
             return new AuthenticatedUserDto
             {
                 Token = tokenHandler.WriteToken(token),
-              
+                Roles = roleNames,
             };     
         } 
     }

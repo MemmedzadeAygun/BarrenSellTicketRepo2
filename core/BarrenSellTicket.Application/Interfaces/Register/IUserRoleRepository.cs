@@ -15,5 +15,6 @@ namespace BarrenSellTicket.Application.Interfaces.Register
         bool Remove(UserRole userRole);
         Task<UserRole> GetUserById(int id);
         Task<List<UserRole>> GetWhere(Expression<Func<UserRole, bool>> expression);
+        Task<List<string>> GetRoleNameByUserId(int id);
     }
 }
