@@ -34,6 +34,7 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks
         public DbSet<Users> Users => this.Set<Users>();
         public DbSet<Role> Role => this.Set<Role>();
         public DbSet<UserRole> UserRole => this.Set<UserRole>();
+        public DbSet<Customer> Customer => this.Set<Customer>();
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

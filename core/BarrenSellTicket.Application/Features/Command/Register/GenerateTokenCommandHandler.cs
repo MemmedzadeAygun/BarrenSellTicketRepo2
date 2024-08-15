@@ -42,6 +42,12 @@ namespace BarrenSellTicket.Application.Features.Command.Register
                 throw new SellTicketException("password is incorrect");  //FluentValidation'la tamamla
             }
 
+            var userDetails = await _uow.UserRepository.GetUserDetailsById(user.Id);
+            if (userDetails is null)
+            {
+                throw new SellTicketException("User details not found");
+            }
+
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"));
 
             var credentials=new SigningCredentials(securityKey,SecurityAlgorithms.HmacSha256);
@@ -75,6 +81,9 @@ namespace BarrenSellTicket.Application.Features.Command.Register
             {
                 Token = tokenHandler.WriteToken(token),
                 Roles = roleNames,
+                FirstName=userDetails.FirstName,
+                LastName=userDetails.LastName,
+                Email=userDetails.Email,
             };     
         } 
     }

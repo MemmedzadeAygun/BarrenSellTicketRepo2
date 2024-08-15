@@ -1,4 +1,5 @@
-﻿using BarrenSellTicket.Application.Interfaces.Register;
+﻿using BarrenSellTicket.Application.Dtos;
+using BarrenSellTicket.Application.Interfaces.Register;
 using BarrenSellTicket.Domain.Entities.Accounts;
 using BarrenSellTicket.Domain.Entities.Events;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,22 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories.Register
         public async Task<Users> GetUserById(int id)
         {
            return await _dbcontext.Set<Users>().FindAsync(id);
+        }
+
+        public async Task<CustomerDto> GetUserDetailsById(int userId)
+        {
+            var userDetail = await _dbcontext.Customer
+                .Where(c => c.UserId == userId)
+                .Select(c => new CustomerDto
+                {
+                    Email = c.Email,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName
+                })
+                .FirstAsync();
+
+            return userDetail;
+
         }
 
         public async Task<Users?> GetUsers(string email)

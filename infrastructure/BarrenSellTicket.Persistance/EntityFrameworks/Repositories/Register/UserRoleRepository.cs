@@ -36,15 +36,6 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories.Register
             return roles;
         }
 
-        //public async Task<List<UserRole>> GetRoleNameByUserId(int id)
-        //{
-        //    var roles=await _dbContext.Set<UserRole>()
-        //        .Include(x=>x.Role)
-        //        .Where(x=>x.RoleId== id)
-        //        .ToListAsync();
-
-        //    roles.Select(x => x.Role.RoleName);
-        //}
 
         public async Task<UserRole> GetUserById(int id)
         {

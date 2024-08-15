@@ -1,4 +1,5 @@
-﻿using BarrenSellTicket.Domain.Entities.Accounts;
+﻿using BarrenSellTicket.Application.Dtos;
+using BarrenSellTicket.Domain.Entities.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace BarrenSellTicket.Application.Interfaces.Register
         void UpdateUser(Users user);
         Task<Users> GetUserById(int id);
         Task<Users?> GetUsers(string email);
+        Task<CustomerDto> GetUserDetailsById(int userId);
     }
 }
