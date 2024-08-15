@@ -93,5 +93,6 @@ namespace BarrenSellTicket.WebApi.Controllers
 
             return await SuccessResult("OrganizerDetail data is selected", organizerdetail);
         }
+
     }
 }

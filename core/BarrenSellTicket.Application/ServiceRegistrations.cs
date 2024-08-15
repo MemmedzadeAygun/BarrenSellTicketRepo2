@@ -24,6 +24,10 @@ namespace BarrenSellTicket.Application
             services.AddFluentValidationClientsideAdapters();
 
             services.AddScoped(typeof(AbstractValidator<AddBankAccountCommand>),typeof(AddBankAccountCommandValidator));
+            services.AddScoped(typeof(AbstractValidator<AddContactListCommand>), typeof(AddContactListCommandValidators));
+            services.AddScoped(typeof(AbstractValidator<AddCouponCommand>),typeof(AddCouponCommandValidator));
+            services.AddScoped(typeof(AbstractValidator<AddEventCommand>), typeof(AddEventCommandValidator));
+            services.AddScoped(typeof(AbstractValidator<AddOrganizerDetailCommand>), typeof(AddOrganizerDetailCommandValidator));
         }
     }
 }

@@ -18,6 +18,9 @@ public static class ServiceRegistration
     public static void AddPersistanceServices(this IServiceCollection services,
         IConfiguration configuration)
     {
+//#if DEBUG
+//        var connectionString = configuration.GetConnectionString("local");
+//#endif
         var connectionString = configuration.GetConnectionString("local");
 
         services
