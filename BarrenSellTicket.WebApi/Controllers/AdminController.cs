@@ -3,6 +3,7 @@ using BarrenSellTicket.Application.Features.Command.Register;
 using BarrenSellTicket.Application.Features.Queries;
 using BarrenSellTicket.Domain.Entities.Accounts;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,7 @@ namespace BarrenSellTicket.WebApi.Controllers
 
         [HttpGet]
         [ActionName("role")]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<ApiResponseModel<IEnumerable<RoleViewDto>>>> GetRoleAsync()
         {
             var role = await _mediator.Send(new GetRoleQuery());

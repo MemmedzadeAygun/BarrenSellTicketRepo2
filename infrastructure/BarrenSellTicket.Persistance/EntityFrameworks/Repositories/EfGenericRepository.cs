@@ -8,10 +8,10 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories;
+namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories;   
 
 public class EfGenericRepository<T> : IRepository<T> where T : BaseEntity
-{
+{       
     private readonly BarrenSellTicketContext _dbcontext;
 
     protected DbSet<T> Table=>_dbcontext.Set<T>();

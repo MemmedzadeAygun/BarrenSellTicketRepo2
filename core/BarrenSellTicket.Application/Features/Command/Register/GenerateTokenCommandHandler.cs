@@ -2,12 +2,14 @@
 using BarrenSellTicket.Application.Extensions;
 using BarrenSellTicket.Application.Helper;
 using BarrenSellTicket.Application.Interfaces;
+using BarrenSellTicket.Domain.Entities.Accounts;
 using MediatR;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +54,10 @@ namespace BarrenSellTicket.Application.Features.Command.Register
                 
             };
 
+            //var userRoles = await _uow.RoleRepository.GetWhere(x=>x.UserId == user.Id);
+
+            //var roleNames = userRoles.Select(ur => ur.role).ToList();
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject=new ClaimsIdentity(claims),
@@ -65,7 +71,8 @@ namespace BarrenSellTicket.Application.Features.Command.Register
 
             return new AuthenticatedUserDto
             {
-                Token = tokenHandler.WriteToken(token)
+                Token = tokenHandler.WriteToken(token),
+              
             };     
         } 
     }

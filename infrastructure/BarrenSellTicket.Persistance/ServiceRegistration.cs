@@ -30,5 +30,6 @@ public static class ServiceRegistration
 
         services.AddHttpContextAccessor();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddCors();
     }
 }

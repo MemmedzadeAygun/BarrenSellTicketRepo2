@@ -72,5 +72,18 @@ namespace BarrenSellTicket.WebApi.Controllers
 
             return await SuccessResult("Data selected successfully", eventImages);
         }
+
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ApiResponseModel<string>>> UpdateEvent(int id, [FromBody] UpdateEventCommand command)
+        {
+            if (id!=command.Id)
+            {
+                return BadRequest("Id mismatch");
+            }
+
+            await _mediator.Send(command);
+            return await SuccessResult<string>("Event updat successfully");
+        }
     }
 }

@@ -72,6 +72,9 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseMiddleware<ExceptionHandlerMiddleWare>();
+
+app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:5174"));
+
 app.UseAuthorization();
 //app.UseAuthentication();
 
