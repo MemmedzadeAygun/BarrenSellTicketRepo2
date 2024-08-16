@@ -10,10 +10,12 @@ namespace BarrenSellTicket.Application.Dtos
 {
     public class BankAccountDto:IMapTo<BankAccount>
     {
+        public int Id { get; set; }
         public string AccountName { get; set; }
         public string BankName { get; set; }
         public long AccountNumber { get; set; }
         public string SwiftCode { get; set; }
         public string Iban { get; set; }
+        public CustomerDto Customer { get; set; }
     }
 }

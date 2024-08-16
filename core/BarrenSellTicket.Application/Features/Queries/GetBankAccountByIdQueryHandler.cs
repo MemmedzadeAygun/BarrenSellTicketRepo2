@@ -21,13 +21,14 @@ namespace BarrenSellTicket.Application.Features.Queries
         }
         public async Task<BankAccountDto> Handle(GetBankAccountByIdQuery request, CancellationToken cancellationToken)
         {
-            var bankAccount = await _unitOfWork.BankAccountRepository.GetByIdAsync(request.bankAccountId);
+            var bankAccount = await _unitOfWork.BankAccountRepository.GetById(request.bankAccountId);
             if (bankAccount == null)
             {
                 return null;
             }
 
             var bankAccountDto = _mapper.Map<BankAccountDto>(bankAccount);
+            bankAccountDto.Customer = _mapper.Map<CustomerDto>(bankAccount.Customer);
             return bankAccountDto;
         }
     }

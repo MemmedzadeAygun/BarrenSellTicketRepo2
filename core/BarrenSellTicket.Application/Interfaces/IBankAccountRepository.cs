@@ -9,4 +9,5 @@ namespace BarrenSellTicket.Application.Interfaces;
 
 public interface IBankAccountRepository:IRepository<BankAccount>
 {
+    Task<BankAccount> GetById(int id);
 }
