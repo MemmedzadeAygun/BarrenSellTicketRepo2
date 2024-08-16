@@ -48,6 +48,12 @@ namespace BarrenSellTicket.Application.Features.Command.Register
                 throw new SellTicketException("User details not found");
             }
 
+           var address=await _uow.CustomerRepository.GetAddressById(customerId: user.Id);
+            if (address is null)
+            {
+                throw new SellTicketException("address not found");
+            }
+
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"));
 
             var credentials=new SigningCredentials(securityKey,SecurityAlgorithms.HmacSha256);
@@ -81,9 +87,13 @@ namespace BarrenSellTicket.Application.Features.Command.Register
             {
                 Token = tokenHandler.WriteToken(token),
                 Roles = roleNames,
+                UserId=userDetails.Id,
                 FirstName=userDetails.FirstName,
                 LastName=userDetails.LastName,
                 Email=userDetails.Email,
+                Country=address.Country,
+                City=address.City,
+                Addres=address.Addres
             };     
         } 
     }

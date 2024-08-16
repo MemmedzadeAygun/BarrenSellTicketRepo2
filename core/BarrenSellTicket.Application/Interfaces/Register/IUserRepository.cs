@@ -15,5 +15,6 @@ namespace BarrenSellTicket.Application.Interfaces.Register
         Task<Users> GetUserById(int id);
         Task<Users?> GetUsers(string email);
         Task<CustomerDto> GetUserDetailsById(int userId);
+
     }
 }

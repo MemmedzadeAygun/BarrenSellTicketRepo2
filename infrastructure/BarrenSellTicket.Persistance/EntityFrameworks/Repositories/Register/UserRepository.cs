@@ -24,6 +24,8 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories.Register
             await _dbcontext.Set<Users>().AddAsync(user);
         }
 
+       
+
         public async Task<Users> GetUserById(int id)
         {
            return await _dbcontext.Set<Users>().FindAsync(id);
@@ -35,6 +37,7 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories.Register
                 .Where(c => c.UserId == userId)
                 .Select(c => new CustomerDto
                 {
+                    Id=c.Id,
                     Email = c.Email,
                     FirstName = c.FirstName,
                     LastName = c.LastName
@@ -44,6 +47,8 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories.Register
             return userDetail;
 
         }
+
+
 
         public async Task<Users?> GetUsers(string email)
         {
