@@ -10,6 +10,7 @@ namespace BarrenSellTicket.Application.Dtos
 {
     public class ContactListViewDto:IMapTo<ContactList>
     {
+        public int Id { get; set; }
         public string ListName { get; set; }
         public string Description { get; set; }
         public string FirstName { get; set; }

@@ -11,6 +11,7 @@ namespace BarrenSellTicket.Application.Dtos
 {
     public class CouponViewDto:IMapTo<Coupon>
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public decimal Discount { get; set; }

@@ -32,5 +32,14 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories
                 .Include(x => x.Image)
                 .ToListAsync();
         }
+
+        public async Task<Event> GetById(int id)
+        {
+            return await _context.Events
+                .Include(x => x.EventCategory)
+                .Include(x => x.Address)
+                .Include(x => x.EventType)
+                .FirstOrDefaultAsync();
+        }
     }
 }

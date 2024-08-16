@@ -40,6 +40,7 @@ namespace BarrenSellTicket.Application.Features.Queries
 
                 var eventDto = new EventViewDto
                 {
+                    Id=eventEntity.Id,
                     Name = eventEntity.Name,
                     EventDate = eventEntity.EventDate,
                     BeginTime = eventEntity.BeginTime,

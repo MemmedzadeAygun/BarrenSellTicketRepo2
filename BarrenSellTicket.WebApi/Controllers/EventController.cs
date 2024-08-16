@@ -1,8 +1,10 @@
 ﻿using BarrenSellTicket.Application.Dtos;
 using BarrenSellTicket.Application.Extensions;
 using BarrenSellTicket.Application.Features.Command.Others;
+using BarrenSellTicket.Application.Features.Command.Others.DeleteCommand;
 using BarrenSellTicket.Application.Features.Command.Others.UpdateCommand;
 using BarrenSellTicket.Application.Features.Queries;
+using BarrenSellTicket.Domain.Entities.Events;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -84,6 +86,45 @@ namespace BarrenSellTicket.WebApi.Controllers
 
             await _mediator.Send(command);
             return await SuccessResult<string>("Event updat successfully");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ApiResponseModel<string>>> DeleteEvent(int id)
+        {
+            var command = new DeleteEventCommand
+            {
+                Id = id
+            };
+
+            try
+            {
+                await _mediator.Send(command);
+                return await SuccessResult<string>("Delete event successfully");
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return await NotFoundResult<string>(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return await InternalServerErrorResult<string>(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Event>> GetByIdEvent(int id)
+        {
+            var query = new GetEventByIdQuery
+            {
+                Id = id
+            };
+            var result = await _mediator.Send(query);
+            if (result==null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
         }
     }
 }
