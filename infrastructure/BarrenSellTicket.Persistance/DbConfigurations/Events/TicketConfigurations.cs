@@ -23,18 +23,11 @@ namespace BarrenSellTicket.Persistance.DbConfigurations.Events
             builder.Property(x => x.AvailableCount)
                 .IsRequired();
 
-            builder.Property(x => x.Quantity)
-                .IsRequired();
-
             builder
                 .HasMany(x => x.Orders)
                 .WithOne(x => x.Ticket)
                 .HasForeignKey(x => x.TicketId);
 
-            builder
-                .HasOne(x => x.User)
-                .WithMany(x => x.Tickets)
-                .HasForeignKey(x=>x.UserId);
         }
     }
 }

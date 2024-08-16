@@ -12,11 +12,8 @@ namespace BarrenSellTicket.Domain.Entities.Events
     {
         public decimal Price { get; set; }
         public int AvailableCount { get; set; }
-        public int Quantity { get; set; }
         public int EventId { get; set; }
         public Event Event { get; set; }
-        public int? UserId { get; set; }
-        public Users User { get; set; }
         public ICollection<Order> Orders { get; set; }
     }
 }
