@@ -9,4 +9,6 @@ namespace BarrenSellTicket.Application.Interfaces;
 
 public interface ITicketRepository:IRepository<Ticket>
 {
+    Task<List<Ticket>> GetAll();
+    Task<Ticket> GetById(int id);
 }

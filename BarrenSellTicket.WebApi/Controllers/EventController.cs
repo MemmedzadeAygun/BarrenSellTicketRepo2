@@ -85,7 +85,7 @@ namespace BarrenSellTicket.WebApi.Controllers
             }
 
             await _mediator.Send(command);
-            return await SuccessResult<string>("Event updat successfully");
+            return await SuccessResult<string>("Event update successfully");
         }
 
         [HttpDelete("{id}")]

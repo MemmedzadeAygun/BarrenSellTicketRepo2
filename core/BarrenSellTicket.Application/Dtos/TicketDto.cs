@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace BarrenSellTicket.Application.Dtos
 {
-    public class CategoryDto:IMapTo<EventCategory>
+    public class TicketDto:IMapTo<Ticket>
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int AvailableCount { get; set; }
+        public EventViewDto Event { get; set; }
     }
 }

@@ -16,7 +16,6 @@ namespace BarrenSellTicket.Domain.Entities.Accounts
         public ICollection<UserRole?> UserRoles { get; set; }=new HashSet<UserRole?>();
         public ICollection<ContactList> ContactLists { get; set; }
         public Customer Customer { get; set; }
-        public ICollection<Ticket> Tickets { get; set; }
 
     }
 
