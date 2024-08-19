@@ -1,5 +1,6 @@
 ﻿using BarrenSellTicket.Application.Dtos;
 using BarrenSellTicket.Application.Features.Queries;
+using BarrenSellTicket.Domain.Entities.Events;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,5 +23,6 @@ namespace BarrenSellTicket.WebApi.Controllers
 
             return await SuccessResult("Data selected successfully", categories);
         }
+
     }
 }

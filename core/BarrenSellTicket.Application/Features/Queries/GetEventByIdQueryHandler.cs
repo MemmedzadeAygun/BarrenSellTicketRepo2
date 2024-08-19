@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BarrenSellTicket.Application.Dtos;
 using BarrenSellTicket.Application.Interfaces;
+using BarrenSellTicket.Domain.Entities.Events;
+using BarrenSellTicket.Infrastructure.Helper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -27,13 +29,68 @@ namespace BarrenSellTicket.Application.Features.Queries
                 return null;
             }
 
-            var eventsDto = _mapper.Map<EventViewDto>(events);
+            var eventDto = new EventViewDto
+            {
+                Id = events.Id,
+                Name = events.Name,
+                EventDate = events.EventDate,
+                BeginTime = events.BeginTime,
+                EndTime = events.EndTime,
+                Duration = events.Duration,
+                Description = events.Description,
 
-            eventsDto.Category = _mapper.Map<CategoryDto>(events.EventCategory);
-            eventsDto.Type = _mapper.Map<TypeDto>(events.EventType);
-            eventsDto.Address = _mapper.Map<AddressDto>(events.Address);
+                Address = new AddressDto
+                {
+                    Id = events.Address.Id,
+                    Country = events.Address.Country,
+                    City = events.Address.City,
+                    Addres = events.Address.Addres
+                },
 
-            return eventsDto;
+                Category = new CategoryDto
+                {
+                    Id = events.EventCategory.Id,
+                    Name = events.EventCategory.Name
+                },
+
+                Type = new TypeDto
+                {
+                    Name = events.EventType.Name
+                },
+
+                Tickets = events.Tickets.Select(ticket => new TicketViewDto
+                {
+                    Id = ticket.Id,
+                    Price = ticket.Price,
+                    AvailableCount = ticket.AvailableCount
+                }).ToList(),
+            };
+
+            if (events.Image!=null)
+            {
+                string imageUrl = null;
+                if (!string.IsNullOrEmpty(events.Image.ImageUrl) && File.Exists(events.Image.ImageUrl))
+                {
+                    string imageBase64 = ImageHelper.ImageToBase64(events.Image.ImageUrl);
+                    imageUrl = $"data:image/jpeg;base64,{imageBase64}";
+                }
+
+                eventDto.Image = new ImageDto
+                {
+                    ImageUrl = imageUrl,
+                    Description = events.Image.Description
+                };
+            }
+
+            //var eventsDto = _mapper.Map<EventViewDto>(events);
+
+            //eventsDto.Category = _mapper.Map<CategoryDto>(events.EventCategory);
+            //eventsDto.Type = _mapper.Map<TypeDto>(events.EventType);
+            //eventsDto.Address = _mapper.Map<AddressDto>(events.Address);
+
+
+
+            return eventDto;
         }
     }
 }

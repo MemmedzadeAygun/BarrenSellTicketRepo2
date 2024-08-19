@@ -3,6 +3,7 @@ using BarrenSellTicket.Application.Dtos;
 using BarrenSellTicket.Application.Interfaces;
 using BarrenSellTicket.Infrastructure.Helper;
 using MediatR;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,37 +12,29 @@ using System.Threading.Tasks;
 
 namespace BarrenSellTicket.Application.Features.Queries
 {
-    public class GetEventQueryHandler : IRequestHandler<GetEventQuery, List<EventViewDto>>
+    public class GetEventByCategoryIdQueryHandler : IRequestHandler<GetEventByCategoryIdQuery, List<EventViewDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public GetEventQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetEventByCategoryIdQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<List<EventViewDto>> Handle(GetEventQuery request, CancellationToken cancellationToken)
+        public async Task<List<EventViewDto>> Handle(GetEventByCategoryIdQuery request, CancellationToken cancellationToken)
         {
-            var events = await _unitOfWork.EventRepository.GetAll();
-            if (events == null)
+            var events = await _unitOfWork.EventRepository.GetEventByCategoryId(request.CategoryId);
+            if (events is null)
             {
-                throw new NullReferenceException("events is null");
+                return new List<EventViewDto>();
             }
 
-
-            var eventDtos =new List<EventViewDto>();
-            foreach (var eventEntity in events)
+            var eventDtos = events.Select(eventEntity => 
             {
-
-                if (eventEntity.EventCategory == null)
-                {
-                    throw new NullReferenceException("eventEntity.Category is null");
-                }
-
                 var eventDto = new EventViewDto
                 {
-                    Id=eventEntity.Id,
+                    Id = eventEntity.Id,
                     Name = eventEntity.Name,
                     EventDate = eventEntity.EventDate,
                     BeginTime = eventEntity.BeginTime,
@@ -49,27 +42,31 @@ namespace BarrenSellTicket.Application.Features.Queries
                     Duration = eventEntity.Duration,
                     Description = eventEntity.Description,
 
-                    Address=new AddressDto
+                    Address = new AddressDto
                     {
-                        Country=eventEntity.Address.Country,
-                        City=eventEntity.Address.City,
-                        Addres=eventEntity.Address.Addres
+                        Id = eventEntity.Address.Id,
+                        Country = eventEntity.Address.Country,
+                        City = eventEntity.Address.City,
+                        Addres = eventEntity.Address.Addres
                     },
-                    Type=new TypeDto
+
+                    Type = new TypeDto
                     {
-                        Name=eventEntity.EventType.Name,
+                        Name = eventEntity.EventType.Name
                     },
-                    Category=new CategoryDto
+
+                    Category = new CategoryDto
                     {
-                        Id=eventEntity.EventCategory.Id,
-                        Name=eventEntity.EventCategory.Name
+                        Id = eventEntity.EventCategory.Id,
+                        Name = eventEntity.EventCategory.Name
                     },
-                    Tickets= eventEntity.Tickets.Select(t=>new TicketViewDto
+
+                    Tickets = eventEntity.Tickets?.Select(t => new TicketViewDto
                     {
-                        Id=t.Id,
-                        Price=t.Price,
-                        AvailableCount=t.AvailableCount
-                    }).ToList(),
+                        Id = t.Id,
+                        Price = t.Price,
+                        AvailableCount = t.AvailableCount
+                    }).ToList()
                 };
 
                 if (eventEntity.Image != null)
@@ -88,9 +85,12 @@ namespace BarrenSellTicket.Application.Features.Queries
                     };
                 }
 
-                eventDtos.Add(eventDto);
-            }
+                return eventDto;
+
+            }).ToList();
+
             return eventDtos;
         }
+        
     }
 }

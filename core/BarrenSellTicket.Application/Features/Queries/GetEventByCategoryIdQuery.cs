@@ -1,5 +1,4 @@
 ﻿using BarrenSellTicket.Application.Dtos;
-using BarrenSellTicket.Application.Mappers.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace BarrenSellTicket.Application.Features.Queries
 {
-    public class GetEventTypeIdQuery:IRequest<List<EventViewDto>>
+    public class GetEventByCategoryIdQuery:IRequest<List<EventViewDto>>
     {
-        public int TypeId { get; set; }
+        public int CategoryId { get; set; }
     }
 }

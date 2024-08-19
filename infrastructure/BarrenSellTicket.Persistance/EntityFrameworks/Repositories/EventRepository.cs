@@ -23,6 +23,8 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories
                 .Include(x=>x.EventCategory)
                 .Include(x=>x.Address)
                 .Include(x=>x.EventType)
+                .Include(x=>x.Tickets)
+                .Include(x=>x.Image)
                 .ToListAsync();
         }
 
@@ -39,16 +41,32 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories
                 .Include(x => x.EventCategory)
                 .Include(x => x.EventType)
                 .Include(x => x.Address) 
-                .FirstOrDefaultAsync();
+                .Include(x=>x.Tickets)
+                .Include(x=>x.Image)
+                .FirstOrDefaultAsync(x=>x.Id==id);
         }
 
-        public async Task<Event> GetEventTypeId(int typeId)
+        public async Task<List<Event>> GetEventByCategoryId(int categoryId)
+        {
+            return await _context.Events
+                .Include(e => e.EventType)
+                .Include(e => e.Address)
+                .Include(e => e.Tickets)
+                .Include(e=>e.Image)
+                .Include(e => e.EventCategory)
+                .Where(e => e.EventCategoryId == categoryId)
+                .ToListAsync();
+        }
+
+        public async Task<List<Event>> GetEventTypeId(int typeId)
         {
             return await _context.Events
                  .Include(x => x.EventCategory)
                  .Include(x => x.Address)
                  .Include(x=>x.EventType)
-                 .FirstOrDefaultAsync(x => x.EventTypeId == typeId);
+                 .Where(x => x.EventTypeId == typeId)
+                 .ToListAsync();
         }
+
     }
 }

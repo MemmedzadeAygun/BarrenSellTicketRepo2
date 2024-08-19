@@ -20,5 +20,7 @@ namespace BarrenSellTicket.Application.Dtos
         public AddressDto Address { get; set; }
         public TypeDto Type { get; set; }
         public CategoryDto Category { get; set; }
+        public List<TicketViewDto> Tickets { get; set; }
+        public ImageDto Image { get; set; }
     }
 }

@@ -143,5 +143,23 @@ namespace BarrenSellTicket.WebApi.Controllers
 
             return Ok(result);
         }
+
+
+        [HttpGet("{categoryid}")]
+        public async Task<ActionResult<Event>> GetEventByCategoryId(int categoryid)
+        {
+            var query = new GetEventByCategoryIdQuery
+            {
+                CategoryId = categoryid
+            };
+
+            var result = await _mediator.Send(query);
+            if (result is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
     }
 }
