@@ -10,6 +10,7 @@ namespace BarrenSellTicket.Application.Dtos
 {
     public class BankAccountViewDto:IMapTo<BankAccount>,IMapTo<Customer>
     {
+        public int Id { get; set; }
         public string BankName { get; set; }
         public long AccountNumber { get; set; }
         public string FirstName { get; set; }

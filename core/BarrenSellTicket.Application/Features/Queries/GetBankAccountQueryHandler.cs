@@ -33,6 +33,7 @@ namespace BarrenSellTicket.Application.Features.Queries
 
                 var dto = new BankAccountViewDto
                 {
+                    Id=bankAccount.Id,
                     BankName = bankAccount.BankName,
                     AccountNumber = bankAccount.AccountNumber,
                     FirstName = customer.FirstName,
