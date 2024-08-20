@@ -54,6 +54,7 @@ namespace BarrenSellTicket.WebApi.Controllers
 
         [HttpGet]
         [ActionName("events")]
+        [AllowAnonymous]
         public async Task<ActionResult<ApiResponseModel<List<EventViewDto>>>> GetEvents()
         {
             var events = await _mediator.Send(new GetEventQuery());
@@ -146,6 +147,7 @@ namespace BarrenSellTicket.WebApi.Controllers
 
 
         [HttpGet("{categoryid}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Event>> GetEventByCategoryId(int categoryid)
         {
             var query = new GetEventByCategoryIdQuery

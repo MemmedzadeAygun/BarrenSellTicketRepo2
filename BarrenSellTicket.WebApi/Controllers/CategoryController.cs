@@ -2,6 +2,7 @@
 using BarrenSellTicket.Application.Features.Queries;
 using BarrenSellTicket.Domain.Entities.Events;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
