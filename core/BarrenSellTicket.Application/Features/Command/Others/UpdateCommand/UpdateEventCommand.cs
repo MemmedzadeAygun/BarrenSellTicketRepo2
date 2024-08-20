@@ -19,9 +19,9 @@ namespace BarrenSellTicket.Application.Features.Command.Others.UpdateCommand
         public DateTime BeginTime { get; set; }
         public DateTime EndTime { get; set; }
         public AddressDto Address { get; set; }
-        public int EventTypeId { get; set; }
-        public int EventCategoryId { get; set; }
-        public int OrganizerDetailId { get; set; }
+        //public int EventTypeId { get; set; }
+        //public int EventCategoryId { get; set; }
+        //public int OrganizerDetailId { get; set; }
         public string Description { get; set; }
     }
 }

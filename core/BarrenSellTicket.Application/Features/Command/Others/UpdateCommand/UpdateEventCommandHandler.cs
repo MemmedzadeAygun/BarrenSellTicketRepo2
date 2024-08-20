@@ -21,7 +21,7 @@ namespace BarrenSellTicket.Application.Features.Command.Others.UpdateCommand
         }
         public async Task Handle(UpdateEventCommand request, CancellationToken cancellationToken)
         {
-            var events = await _unitOfWork.EventRepository.GetByIdAsync(request.Id);
+            var events = await _unitOfWork.EventRepository.GetEventById(request.Id);
             if (events is null)
             {
                 throw new ArgumentException("Event not found");
@@ -29,16 +29,16 @@ namespace BarrenSellTicket.Application.Features.Command.Others.UpdateCommand
 
             _mapper.Map(request, events);
 
-            if (events.OrganizerDetailId!=request.OrganizerDetailId)
-            {
-                var organizerDetail = await _unitOfWork.OrganizerDetailRepository.GetByIdAsync(request.OrganizerDetailId);
-                if (organizerDetail==null)
-                {
-                    throw new ArgumentException("Organizer detail not found");
-                }
+            //if (events.OrganizerDetailId!=request.OrganizerDetailId)
+            //{
+            //    var organizerDetail = await _unitOfWork.OrganizerDetailRepository.GetByIdAsync(request.OrganizerDetailId);
+            //    if (organizerDetail==null)
+            //    {
+            //        throw new ArgumentException("Organizer detail not found");
+            //    }
 
-                events.OrganizerDetailId = request.OrganizerDetailId;
-            }
+            //    events.OrganizerDetailId = request.OrganizerDetailId;
+            //}
 
             if (request.Address!=null)
             {

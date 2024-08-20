@@ -41,7 +41,7 @@ namespace BarrenSellTicket.Application.Features.Queries
 
                 Address = new AddressDto
                 {
-                    Id = events.Address.Id,
+                    //Id = events.Address.Id,
                     Country = events.Address.Country,
                     City = events.Address.City,
                     Addres = events.Address.Addres

@@ -24,7 +24,7 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories
                 .Where(a => a.AddressId == customerId)
                 .Select(a => new AddressDto
                 {
-                    Id = a.Id,
+                    //Id = a.Id,
                     Country = a.Address.Country,
                     City = a.Address.City,
                     Addres = a.Address.Addres

@@ -58,6 +58,13 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Event> GetEventById(int id)
+        {
+            return await _context.Events           
+                .Include(x => x.Address)          
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<List<Event>> GetEventTypeId(int typeId)
         {
             return await _context.Events
