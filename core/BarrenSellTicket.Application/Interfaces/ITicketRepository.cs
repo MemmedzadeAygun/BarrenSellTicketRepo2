@@ -11,4 +11,5 @@ public interface ITicketRepository:IRepository<Ticket>
 {
     Task<List<Ticket>> GetAll();
     Task<Ticket> GetById(int id);
+    Task<Ticket> GetTicketByEventIdAsync(int eventId);
 }

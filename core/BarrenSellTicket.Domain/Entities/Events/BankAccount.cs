@@ -14,7 +14,6 @@ namespace BarrenSellTicket.Domain.Entities.Events
         public long AccountNumber { get; set; }
         public string SwiftCode { get; set; }
         public string Iban { get; set; }
-        public ICollection<Payouts> Payouts { get; set; }
         public int? CustomerId { get; set; }
         public Customer Customer { get; set; }
     }

@@ -27,6 +27,9 @@ namespace BarrenSellTicket.Persistance.DbConfigurations.Events
                 .IsRequired()
                 .HasMaxLength(50);
 
+            builder.Property(x => x.Quantity)
+                .IsRequired();
+
             builder
                 .HasMany(x=>x.OrderCoupons)
                 .WithOne(x=>x.Order)

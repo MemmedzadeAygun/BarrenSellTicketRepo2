@@ -15,15 +15,6 @@ namespace BarrenSellTicket.Persistance.DbConfigurations.Events
         {
             base.Configure(builder);
 
-            builder.Property(p => p.DatePaid)
-                .IsRequired();
-
-            builder.Property(p => p.Date)
-                .IsRequired();
-
-            builder.Property(p => p.TransactionID)
-                .IsRequired()
-                .HasMaxLength(100);
 
             builder.Property(p => p.CardNumber)
                 .IsRequired()
@@ -40,9 +31,6 @@ namespace BarrenSellTicket.Persistance.DbConfigurations.Events
                 .WithMany(p => p.Payouts)
                 .HasForeignKey(p => p.OrderId);
 
-            builder.HasOne(p => p.BankAccount)
-                .WithMany(p => p.Payouts)
-                .HasForeignKey(p => p.BankAccountId);
         }
     }
 }

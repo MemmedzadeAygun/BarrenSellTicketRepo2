@@ -9,4 +9,5 @@ namespace BarrenSellTicket.Application.Interfaces;
 
 public interface ICouponRepository:IRepository<Coupon>
 {
+    Task<Coupon> GetByCodeAsync(string code);
 }
