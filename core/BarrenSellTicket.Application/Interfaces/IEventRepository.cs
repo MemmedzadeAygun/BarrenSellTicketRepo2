@@ -9,7 +9,7 @@ namespace BarrenSellTicket.Application.Interfaces;
 
 public interface IEventRepository:IRepository<Event>
 {
-    Task<List<Event>> GetAll();
+    IQueryable<Event> GetAll();
     Task<List<Event>> GetAllEventImage();
     Task<Event> GetById(int id);
     Task<Event> GetEventById(int id);

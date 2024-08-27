@@ -17,15 +17,16 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories
             _context = dbcontext;
         }
 
-        public async Task<List<Event>> GetAll()
+        public IQueryable<Event> GetAll()
         {
-            return await _context.Events
-                .Include(x=>x.EventCategory)
-                .Include(x=>x.Address)
-                .Include(x=>x.EventType)
-                .Include(x=>x.Tickets)
-                .Include(x=>x.Image)
-                .ToListAsync();
+            return  _context.Events
+                .Include(x => x.EventCategory)
+                .Include(x => x.Address)
+                .Include(x => x.EventType)
+                .Include(x => x.Tickets)
+                .Include(x => x.Image)
+                .AsQueryable();
+                //.ToListAsync();
         }
 
         public async Task<List<Event>> GetAllEventImage()

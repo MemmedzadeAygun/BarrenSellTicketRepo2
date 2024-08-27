@@ -10,5 +10,7 @@ namespace BarrenSellTicket.Application.Features.Queries
 {
     public class GetEventQuery:IRequest<List<EventViewDto>>
     {
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; } 
     }
 }

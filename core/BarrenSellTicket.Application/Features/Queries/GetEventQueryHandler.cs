@@ -23,7 +23,18 @@ namespace BarrenSellTicket.Application.Features.Queries
 
         public async Task<List<EventViewDto>> Handle(GetEventQuery request, CancellationToken cancellationToken)
         {
-            var events = await _unitOfWork.EventRepository.GetAll();
+            var query =  _unitOfWork.EventRepository.GetAll();
+
+            int pageNumber = request.PageNumber > 0 ? request.PageNumber : 1;
+            int pageSize = request.PageSize > 0 ? request.PageSize : 10;
+
+            var pagedQuery = query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            var events = pagedQuery.ToList();
+
             if (events == null)
             {
                 throw new NullReferenceException("events is null");

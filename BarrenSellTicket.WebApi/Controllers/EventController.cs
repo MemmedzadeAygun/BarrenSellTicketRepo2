@@ -55,9 +55,17 @@ namespace BarrenSellTicket.WebApi.Controllers
         [HttpGet]
         [ActionName("events")]
         [AllowAnonymous]
-        public async Task<ActionResult<ApiResponseModel<List<EventViewDto>>>> GetEvents()
+        public async Task<ActionResult<ApiResponseModel<List<EventViewDto>>>> GetEvents(
+            [FromQuery] int pageNumber=1,
+            [FromQuery] int pageSize=10)
         {
-            var events = await _mediator.Send(new GetEventQuery());
+            var query = new GetEventQuery
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
+            var events = await _mediator.Send(query);
 
             return await SuccessResult("Data selected successfully",events);
         }
