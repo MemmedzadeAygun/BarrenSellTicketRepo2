@@ -28,6 +28,7 @@ public static class ServiceRegistration
             .UseSqlServer(connectionString)
             .AddInterceptors(new UpdateBaseEntityInterceptors()));
 
+
         services.AddHttpContextAccessor();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         //services.AddCors();

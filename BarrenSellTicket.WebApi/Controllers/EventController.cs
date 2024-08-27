@@ -113,6 +113,7 @@ namespace BarrenSellTicket.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Event>> GetByIdEvent(int id)
         {
             var query = new GetEventByIdQuery

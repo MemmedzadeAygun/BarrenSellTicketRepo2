@@ -71,7 +71,7 @@ namespace BarrenSellTicket.Application.Features.Command.Register
             {
                 user.UserRoles = new List<UserRole>()
                 {
-                    new UserRole{RoleId= 4 }
+                    new UserRole{RoleId= 5 }
                 };
             }
 

@@ -22,5 +22,6 @@ namespace BarrenSellTicket.Application.Dtos
         public CategoryDto Category { get; set; }
         public List<TicketViewDto> Tickets { get; set; }
         public ImageDto Image { get; set; }
+        //public EventDateCountDownDto CountDown { get; set; }
     }
 }

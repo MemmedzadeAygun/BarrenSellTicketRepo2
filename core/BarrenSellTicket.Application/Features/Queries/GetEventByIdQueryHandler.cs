@@ -82,13 +82,20 @@ namespace BarrenSellTicket.Application.Features.Queries
                 };
             }
 
-            //var eventsDto = _mapper.Map<EventViewDto>(events);
+            //var timeremaining = events.EventDate - DateTime.Now;
 
-            //eventsDto.Category = _mapper.Map<CategoryDto>(events.EventCategory);
-            //eventsDto.Type = _mapper.Map<TypeDto>(events.EventType);
-            //eventsDto.Address = _mapper.Map<AddressDto>(events.Address);
+            //if (timeremaining.TotalSeconds<=0)
+            //{
+            //    timeremaining = TimeSpan.Zero;
+            //}
 
-
+            //eventDto.CountDown = new EventDateCountDownDto
+            //{
+            //    Days = timeremaining.Days,
+            //    Hours = timeremaining.Hours,
+            //    Minutes = timeremaining.Minutes,
+            //    Seconds = timeremaining.Seconds
+            //};
 
             return eventDto;
         }

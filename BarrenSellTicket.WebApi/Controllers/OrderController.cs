@@ -1,4 +1,6 @@
-﻿using BarrenSellTicket.Application.Features.Command.Others;
+﻿using BarrenSellTicket.Application.Dtos;
+using BarrenSellTicket.Application.Features.Command.Others;
+using BarrenSellTicket.Application.Features.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +29,31 @@ namespace BarrenSellTicket.WebApi.Controllers
 
             await _mediator.Send(command);
             return await SuccessResult<string>("Order added successfully");
+        }
+
+        [HttpGet]
+        [ActionName("orders")]
+        public async Task<ActionResult<ApiResponseModel<List<OrderDto>>>> GetOrders()
+        {
+            var orders = await _mediator.Send(new GetAllOrderQuery());
+            return await SuccessResult("Order's data selected successfully", orders);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ApiResponseModel<OrderDto>>> GetOrderById(int id)
+        {
+            var query = new GetOrderByIdQuery
+            {
+                OrderId = id
+            };
+
+            var result = await _mediator.Send(query);
+            if (result is null)
+            {
+                return NotFound();
+            }
+
+            return await SuccessResult("Order data selected successfully", result);
         }
     }
 }
