@@ -13,6 +13,7 @@ namespace BarrenSellTicket.WebApi.Data
                 .AddJsonFile("appsettings.json")
                 .Build();
 
+
             var builder = new DbContextOptionsBuilder<BarrenSellTicketContext>();
             var connectionString = configuration.GetConnectionString("local");
             builder.UseSqlServer(connectionString,b=>b.MigrationsAssembly("BarrenSellTicket.WebApi"));

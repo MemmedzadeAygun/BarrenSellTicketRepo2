@@ -13,6 +13,6 @@ namespace BarrenSellTicket.Application.Features.Command.Others
     {
         public decimal Price { get; set; }
         public int AvailableCount { get; set; }
-        public int EventId { get; set; }
+        //public int EventId { get; set; }
     }
 }

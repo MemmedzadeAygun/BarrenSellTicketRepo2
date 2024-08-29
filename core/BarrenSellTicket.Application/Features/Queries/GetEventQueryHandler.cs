@@ -30,8 +30,7 @@ namespace BarrenSellTicket.Application.Features.Queries
 
             var pagedQuery = query
                 .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+                .Take(pageSize);
 
             var events = pagedQuery.ToList();
 

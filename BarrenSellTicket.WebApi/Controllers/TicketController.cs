@@ -22,14 +22,14 @@ namespace BarrenSellTicket.WebApi.Controllers
         {
         }
 
-        [HttpPost]
-        [ActionName("ticket")]
-        public async Task<ActionResult<ApiResponseModel<string>>> AddTicket(AddTicketCommand command)
+        [HttpPost("ticket/{eventId}")]
+        public async Task<ActionResult<ApiResponseModel<string>>> AddTicket(int eventId,AddTicketCommand command)
         {
             if (command is null)
             {
                 return await BadRequestResult<string>("Invalid request result");
             }
+
             await _mediator.Send(command);
             return await SuccessResult<string>("Ticket added successfully");
         }
