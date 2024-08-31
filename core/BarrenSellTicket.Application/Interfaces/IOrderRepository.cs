@@ -12,4 +12,5 @@ public interface IOrderRepository: IRepository<Order>
 {
     Task<List<OrderDto>> GetOrdersWithUserDetailsAsync();
     Task<OrderDto> GetOrderById(int id);
+    Task<List<OrderDto>> GetOrdersByCreatedId(int createdId);
 }

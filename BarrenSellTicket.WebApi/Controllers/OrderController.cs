@@ -55,5 +55,22 @@ namespace BarrenSellTicket.WebApi.Controllers
 
             return await SuccessResult("Order data selected successfully", result);
         }
+
+        [HttpGet("{createdid}")]
+        public async Task<ActionResult<OrderDto>> GetOrderByCreatedId(int createdid)
+        {
+            var query = new GetOrderByCreatedIdQuery
+            {
+                CreatedId = createdid
+            };
+
+            var result = await _mediator.Send(query);
+            if (result is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
     }
 }

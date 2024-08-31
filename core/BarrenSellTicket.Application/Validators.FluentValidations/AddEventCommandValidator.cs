@@ -45,9 +45,6 @@ namespace BarrenSellTicket.Application.Validators.FluentValidations
             RuleFor(x => x.EventCategoryId)
                 .GreaterThan(0).WithMessage("Category is required and must be greater than 0.");
 
-            RuleFor(x => x.OrganizerDetailId)
-                .GreaterThan(0).WithMessage("Organizer is required and must be greater than 0.");
-
             RuleFor(x => x.Description)
                  .NotEmpty().WithMessage("Description is required")
                  .MaximumLength(1000).WithMessage("Description must be less than 1000 characters.");

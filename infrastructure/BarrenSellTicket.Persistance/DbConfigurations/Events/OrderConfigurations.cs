@@ -34,6 +34,11 @@ namespace BarrenSellTicket.Persistance.DbConfigurations.Events
                 .HasMany(x=>x.OrderCoupons)
                 .WithOne(x=>x.Order)
                 .HasForeignKey(x=>x.OrderId);
+
+            builder
+                .HasOne(x => x.Address)
+                .WithMany(x => x.Orders)
+                .HasForeignKey(x => x.AddressId);
         }
     }
 }

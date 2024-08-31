@@ -69,7 +69,6 @@ namespace BarrenSellTicket.Application.Features.Command.Others
 
             var address = _mapper.Map<Address>(request);
             events.Address= address;
-            events.OrganizerDetailId = request.OrganizerDetailId;
 
 
             await _unitOfWork.EventRepository.AddAsync(events);

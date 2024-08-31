@@ -19,5 +19,6 @@ namespace BarrenSellTicket.Domain.Entities.Events
         public ICollection<Event> Events { get; set; }
         public ICollection<Customer> Customers { get; set; }
         public ICollection<OrganizerDetail> OrganizerDetails { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

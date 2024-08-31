@@ -15,6 +15,7 @@ namespace BarrenSellTicket.Application.Features.Command.Others
         public int Quantity { get; set; }
         public List<string> CouponCodes { get; set; }
         public PayoutsDto Payout { get; set; }
+        public AddressDto Address { get; set; }
 
     }
 }

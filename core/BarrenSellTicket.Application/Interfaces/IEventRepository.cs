@@ -1,4 +1,5 @@
-﻿using BarrenSellTicket.Domain.Entities.Events;
+﻿using BarrenSellTicket.Application.Dtos;
+using BarrenSellTicket.Domain.Entities.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,4 +16,6 @@ public interface IEventRepository:IRepository<Event>
     Task<Event> GetEventById(int id);
     Task<List<Event>> GetEventTypeId(int typeId);
     Task<List<Event>> GetEventByCategoryId(int categoryId);
+    Task<List<Event>> GetEventsByOrganizerId(int organizerId);
+    Task<EventViewDto> GetEventViewById(int id);
 }

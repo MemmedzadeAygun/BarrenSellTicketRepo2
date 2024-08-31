@@ -15,6 +15,8 @@ namespace BarrenSellTicket.Domain.Entities.Events
         public int TicketId { get; set; }
         public int Quantity { get; set; }
         public Ticket Ticket { get; set; }
+        public int? AddressId { get; set; }
+        public Address Address { get; set; }
         public ICollection<OrderCoupon> OrderCoupons { get; set; }
         public ICollection<Payouts> Payouts { get; set; }
     }

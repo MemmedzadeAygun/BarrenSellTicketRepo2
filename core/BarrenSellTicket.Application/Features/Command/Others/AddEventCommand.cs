@@ -21,7 +21,6 @@ namespace BarrenSellTicket.Application.Features.Command.Others
         public string Addres { get; set; }
         public int EventTypeId { get; set; }
         public int EventCategoryId { get; set; }
-        public int OrganizerDetailId { get; set; }
         public IFormFile? ImageFile { get; set; }
         public string Description { get; set; }
     }

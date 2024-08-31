@@ -10,16 +10,11 @@ namespace BarrenSellTicket.Domain.Entities.Events
 {
     public class OrganizerDetail:BaseEntity
     {
-        public OrganizerDetail()
-        {
-            Events = new HashSet<Event>();
-        }
         public string Name { get; set; }
         public string About { get; set; }
         public string Phone { get; set; }
         public int? ImageId { get; set; }
         public Image ProfileImage { get; set; }
-        public ICollection<Event> Events { get; set; }
      
         public int? AddressId { get; set; }
         public Address Address { get; set; }

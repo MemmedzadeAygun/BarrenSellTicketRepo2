@@ -67,6 +67,15 @@ namespace BarrenSellTicket.Application.Features.Command.Others
                 }
             }
 
+            Address address = null; 
+            if (request.Address!=null)
+            {
+                address = _mapper.Map<Address>(request.Address);
+
+                await _unitOfWork.AddressRepository.AddAsync(address);
+                await _unitOfWork.Commit();
+            }
+
             var order = new Order
             {
                 OrderDate = DateTime.UtcNow,
@@ -74,6 +83,7 @@ namespace BarrenSellTicket.Application.Features.Command.Others
                 Status = "Pending",
                 TicketId = ticket.Id,
                 Quantity = request.Quantity,
+                AddressId=address?.Id,
                 Ticket = ticket,
                 OrderCoupons = appliedCoupons.Select(c => new OrderCoupon { CouponId = c.Id }).ToList()
             };

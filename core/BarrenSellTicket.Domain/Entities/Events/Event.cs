@@ -21,10 +21,8 @@ namespace BarrenSellTicket.Domain.Entities.Events
         public EventType EventType { get; set; }
         public int EventCategoryId { get; set; }
         public EventCategory EventCategory { get; set; }
-        public int OrganizerDetailId { get; set; }
         public int? ImageId { get; set; }
         public Image Image { get; set; }
-        public OrganizerDetail OrganizerDetail { get; set; }
         public ICollection<Ticket> Tickets { get; set; }
     }
 }

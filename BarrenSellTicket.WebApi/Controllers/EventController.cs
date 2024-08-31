@@ -9,6 +9,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace BarrenSellTicket.WebApi.Controllers
 {
@@ -122,7 +123,7 @@ namespace BarrenSellTicket.WebApi.Controllers
 
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<Event>> GetByIdEvent(int id)
+        public async Task<ActionResult<EventViewDto>> GetByIdEvent(int id)
         {
             var query = new GetEventByIdQuery
             {
@@ -171,6 +172,23 @@ namespace BarrenSellTicket.WebApi.Controllers
             }
 
             return Ok(result);
+        }
+
+        [HttpGet("organizer/{createdid}")]
+        public async Task<ActionResult<Event>> GetEventByOrganizerId(int createdid)
+        {
+            var query = new GetEventOrganizerIdQuery
+            {
+                CreatedId=createdid
+            };
+            var events = await _mediator.Send(query);
+
+            if (events == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(events);
         }
     }
 }

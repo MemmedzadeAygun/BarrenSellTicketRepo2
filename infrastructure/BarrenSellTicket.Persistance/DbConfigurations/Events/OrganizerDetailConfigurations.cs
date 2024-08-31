@@ -27,11 +27,6 @@ namespace BarrenSellTicket.Persistance.DbConfigurations.Events
                 .HasMaxLength(20);
 
             builder
-                .HasMany(x => x.Events)
-                .WithOne(x => x.OrganizerDetail)
-                .HasForeignKey(x => x.OrganizerDetailId);
-
-            builder
                 .HasOne(x => x.ProfileImage)
                 .WithOne(x => x.OrganizerDetail)
                 .HasForeignKey<OrganizerDetail>(x => x.ImageId);
