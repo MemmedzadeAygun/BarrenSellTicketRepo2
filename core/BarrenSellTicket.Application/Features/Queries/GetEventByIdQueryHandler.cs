@@ -21,6 +21,7 @@ namespace BarrenSellTicket.Application.Features.Queries
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
         public async Task<EventViewDto> Handle(GetEventByIdQuery request, CancellationToken cancellationToken)
         {
             var events = await _unitOfWork.EventRepository.GetEventViewById(request.Id);

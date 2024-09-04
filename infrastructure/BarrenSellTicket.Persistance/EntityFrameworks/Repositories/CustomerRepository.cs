@@ -21,10 +21,9 @@ namespace BarrenSellTicket.Persistance.EntityFrameworks.Repositories
         public async Task<AddressDto> GetAddressById(int customerId)
         {
             var address = await _dbcontext.Customer
-                .Where(a => a.AddressId == customerId)
+                .Where(a => a.Id == customerId)
                 .Select(a => new AddressDto
                 {
-                    //Id = a.Id,
                     Country = a.Address.Country,
                     City = a.Address.City,
                     Addres = a.Address.Addres
